@@ -1,0 +1,43 @@
+models:
+  - name: stg_customer
+    description: Customer data with basic cleaning and transformation applied, one row per customer.
+    config: 
+      contract:
+        enforced: true
+    columns:
+      - name: customer_id
+        description: The unique key for each customer
+        data_type: int
+        constraints: 
+          - type: primary_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_name
+        description: The name for each customer.
+        data_type: string
+
+      - name: customer_address
+        description: The address for each customer.
+        data_type: string
+
+      - name: customer_phone
+        description: The phone number for each customer.
+        data_type: string
+
+      - name: customer_account_balance
+        description: The account balance for each customer.
+        data_type: decimal(12, 2)
+
+      - name: customer_market_segment
+        description: The phone number for each customer.
+        data_type: string
+
+      - name: customer_description
+        description: The account balance for each customer.
+        data_type: string
+
+      - name: dbt_updated_at
+        description: Updated timestamp for model
+        data_type: timestamp_ltz

@@ -1,0 +1,61 @@
+models:
+  - name: fct_orders
+    description: Order data with basic cleaning and transformation applied, one row per order.
+    config: 
+      contract:
+        enforced: true
+    columns:
+      - name: order_id
+        description: The unique key for each order
+        data_type: int
+        constraints: 
+          - type: primary_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: The unique key for each customer placing the order.
+        data_type: int
+        constraint:
+          - type: foreign_key
+            to: ref('stg_customer')
+            to_columns: 'customer_id'
+            
+
+      - name: order_status
+        description: The status of the order.
+        data_type: string
+        data_tests:
+          - accepted_values:
+              values: ['F', 'O', 'P']
+
+      - name: total_price
+        description: The total price of the order.
+        data_type: int
+
+      - name: order_date
+        description: The date order was placed.
+        data_type: date
+
+      - name: order_priority
+        description: The order priority on a scale of 1-5.
+        data_type: string
+        data_tests:
+          - accepted_values:
+              values: ['1-URGENT', '2-HIGH', '3-MEDIUM', '4-NOT SPECIFIED', '5-LOW']
+
+      - name: clerk_id
+        description: The id clerk assisting with the order.
+        data_type: string
+
+      - name: shipping_priority
+        description: The priority for shipping of the order.
+        data_type: int
+        data_tests:
+          - accepted_values:
+              values: [0, 1]
+
+      - name: order_description
+        description: The description for the order.
+        data_type: string
