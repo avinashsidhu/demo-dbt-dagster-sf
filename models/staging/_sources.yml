@@ -1,0 +1,16 @@
+version: 2
+
+sources: 
+  - name: sample_source
+    database: snowflake_sample_data
+    schema: tpch_sf1
+    tables:
+      - name: customer
+
+      - name: orders
+        freshness: 
+          warn_after: {count: 1, period: day }
+          error_after: {count: 2, period: day }
+        loaded_at_field: "o_orderdate::timestamp"
+      
+      - name: lineitem
