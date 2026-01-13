@@ -1,0 +1,15 @@
+dbt_poc_sample:
+  outputs:
+    dev:
+      type: snowflake
+      account: ${{ SNOWFLAKE_ACCOUNT }}
+      user: ${{ SNOWFLAKE_USER }}
+      password: ${{ SNOWFLAKE_PASSWORD }}      
+      role: ${{ SNOWFLAKE_ROLE }}
+      database: analytics_db
+      warehouse: dbt_warehouse
+      schema: analytics
+      threads: 1
+      type: snowflake
+      
+  target: dev
