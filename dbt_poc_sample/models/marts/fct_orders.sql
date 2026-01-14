@@ -1,10 +1,8 @@
 {{
     config (
         schema = 'mart',
-        materialized = 'incremental',
+        materialized = 'table',
         unique_key = 'order_id',
-        on_schema_change = 'fail',
-        incremental_strategy = 'merge'
     )
 }}
 with incremental_data as (
@@ -20,10 +18,6 @@ with incremental_data as (
         order_description
     from
     {{ref('stg_orders')}} 
-
-    {% if is_incremental() %}
-    where dbt_updated_at >= (select max(order_date) from {{ this }} )
-    {% endif %}
 
 )
 select * from incremental_data
