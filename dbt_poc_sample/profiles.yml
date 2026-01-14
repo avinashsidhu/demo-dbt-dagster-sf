@@ -2,10 +2,10 @@ dbt_poc_sample:
   outputs:
     dev:
       type: snowflake
-      account: ${{ SNOWFLAKE_ACCOUNT }}
-      user: ${{ SNOWFLAKE_USER }}
-      password: ${{ SNOWFLAKE_PASSWORD }}      
-      role: ${{ SNOWFLAKE_ROLE }}
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key: "{{ env_var('RSA_PRIVATE_KEY') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
       database: analytics_db
       warehouse: dbt_warehouse
       schema: analytics
